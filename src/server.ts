@@ -1,6 +1,9 @@
 import app from './app'
-const PORT=3000;
+import { HOST, PORT } from './config'
 
-app.listen(PORT,()=>{
-    console.log(`Express server listening on port ${PORT}`);
-})
+exports.apiServer = function (host = HOST, port = PORT, callback?: any) {
+    callback && callback(app);
+    app.listen(port, host, () => {
+        console.log(`listening at http://${host}:${port}`);
+    })
+}
