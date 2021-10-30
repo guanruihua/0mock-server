@@ -1,0 +1,45 @@
+{
+  "name": "rh-dev-mock-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
+    "test": "jest",
+    "test-c": "jest --coverage",
+    "restart": "rimraf dist && npm run build && npm start",
+    "start": "node ./dist/server.js",
+    "prod": "npm run build && npm run start"
+  },
+  "keywords": [
+    "typescript",
+    "express",
+    "node",
+    "javaScript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^16.11.6",
+    "express": "^4.17.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.19.0",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.10.0",
+    "rimraf": "^3.0.2",
+    "nodemon": "^2.0.13",
+    "canvas": "^2.8.0",
+    "lorem-ipsum": "^2.0.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "node-notifier": "^8.0.2",
+    "ts-jest": "^27.0.7"
+  }
+}
