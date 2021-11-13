@@ -7,14 +7,13 @@ import morgan from 'morgan'
 
 class App {
   public app: express.Application;
-  // private router=new Routes();
   constructor() {
     this.app = express();
     this.config()
 
     // 引入路由
     this.app.get('/', (req: Request, res: Response) => {
-      res.send({ message: 'hello express' })
+      res.send({ message: 'Hello rh-dev-mock-server ' })
     })
 
     controller(this.app);
