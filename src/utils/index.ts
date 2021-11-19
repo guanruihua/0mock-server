@@ -1,15 +1,15 @@
 import { VirtualDao } from '../dao'
 
 export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any): {
-	[key: string]: any,
-	// [key: 'get' | 'post']: string,
-	// callback: (params: any) => any
+	'get'?: string,
+	'post'?: string,
+	callback: (params: any) => any
 }[] {
 	return [
 		{
 			'get': `/${tableName}/query`,
 			callback: (params: any): any => {
-				console.log(tableName, 'query', params);
+				console.log(tableName, 'query', params, '');
 
 				if (resultParam) return resultParam(vDao[tableName])
 				return vDao[tableName];
