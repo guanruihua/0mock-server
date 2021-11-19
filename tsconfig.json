@@ -5,17 +5,20 @@
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": true,
-    "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": true,
     "alwaysStrict": true,
+    "experimentalDecorators": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": true, 
     "esModuleInterop": true,
+    "declaration": true,
+    // "declarationDir": "./src/**/*"
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./src/type.d.ts"
   ],
   "exclude": [
     "./src/test",

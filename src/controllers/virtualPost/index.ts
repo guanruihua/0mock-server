@@ -1,4 +1,4 @@
-exports.singleReturnParams = (req: any, res: any): void => {
+export function singleReturnParams(req: any, res: any): void {
 	// console.log(req.body)
 	// console.log(req.query)
 	// console.log(req.params)

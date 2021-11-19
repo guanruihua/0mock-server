@@ -1,8 +1,8 @@
 import { createCanvas } from 'canvas'
 import { IMAGE_MAX_HEIGTH, IMAGE_MAX_WIDTH } from '../config'
 
-exports.image = (req: any, res: any): void => {
-	
+export function image(req: any, res: any): void {
+
 	let [width, height, format, bgColor, textColor] = Object.values(req.params)
 
 	width = Math.min(parseInt(width), IMAGE_MAX_WIDTH)
@@ -13,8 +13,8 @@ exports.image = (req: any, res: any): void => {
 	isHexColor(textColor) && (textColor = `#${textColor}`)
 
 
-	const canvas = createCanvas(width, height)
-	const ctx = canvas.getContext('2d')
+	const canvas: any = createCanvas(width, height)
+	const ctx: any = canvas.getContext('2d')
 
 	ctx.fillStyle = bgColor
 	ctx.fillRect(0, 0, width, height)

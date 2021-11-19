@@ -1,23 +1,25 @@
 import { _Decorator } from 'rh-ts-methods'
 
 const { enumerable } = _Decorator
-type tBaseType =
-	number | number[] |
-	string | string[] |
-	boolean | boolean[] |
-	iBaseObject;
+type tBaseType = any;
+// number | number[] |
+// string | string[] |
+// boolean | boolean[] |
+// undefined | iBaseObject;
 
-interface iBaseObject {
-	[key: string]: tBaseType;
-}
+// interface iBaseObject {
+// 	[key: string]: tBaseType;
+// }
 
-interface iRow {
-	[key: string]: tBaseType;
-}
-
-interface iParam {
-	[key: string]: tBaseType;
-}
+// interface iRow {
+// 	[key: string]: tBaseType;
+// }
+type iRow = any;
+type iParam = any;
+type iBaseObject = any;
+// interface iParam {
+// 	[key: string]: tBaseType;
+// }
 type tTable = iBaseObject[];
 
 function format(param?: iParam) {
@@ -52,7 +54,7 @@ function matchItem(item: iRow, param: tBaseType): boolean {
 	return true;
 }
 
-function select(whereParam?: iParam) {
+function select(whereParam?: iParam): any {
 	if (!whereParam) return this;
 	let list = this.filter((item: iRow): iRow => {
 		if (matchItem(item, whereParam)) return item;
@@ -63,12 +65,12 @@ function select(whereParam?: iParam) {
 	return list;
 }
 
-function selectPage(whereParam?: iParam, pageSize: number | string, pageNo: number | string) {
+function selectPage(pageSize: number | string, pageNo: number | string, whereParam?: iParam): any {
 	let list: any[] = []
 	if (!pageSize) pageSize = 10;
-	if (!pageNo || !Number(pageNo) > 1) pageNo = 1;
-	let min: number = pageSize * (pageNo - 1);
-	let max: number = pageSize * pageNo;
+	if (!pageNo || !(Number(pageNo) > 1)) pageNo = 1;
+	let min: number = Number(pageSize) * (Number(pageNo) - 1);
+	let max: number = Number(pageSize) * Number(pageNo);
 	if (!whereParam) list = this;
 	else {
 		list = this.filter((item: iRow): iRow => {
@@ -83,7 +85,7 @@ function selectPage(whereParam?: iParam, pageSize: number | string, pageNo: numb
 	});
 }
 
-function update(whereParams: iParam | iParam[], updateParam: iParam) {
+function update(whereParams: iParam | iParam[], updateParam: iParam): any {
 	if (!Array.isArray(whereParams)) whereParams = [whereParams];
 	this.filter((item: iRow, index: number): iRow => {
 		const tmpLen: number = whereParams.length;
@@ -98,7 +100,7 @@ function update(whereParams: iParam | iParam[], updateParam: iParam) {
 	return this;
 }
 
-function del(whereParams: iParam | iParam[]) {
+function del(whereParams: iParam | iParam[]): any {
 	if (!Array.isArray(whereParams)) whereParams = [whereParams];
 	this.filter((item: iRow, index: number): iRow => {
 		const tmpLen: number = whereParams.length;
@@ -113,7 +115,7 @@ function del(whereParams: iParam | iParam[]) {
 	return this;
 }
 
-function add(row: iRow | iRow[]) {
+function add(row: iRow | iRow[]): any {
 	if (Array.isArray(row)) {
 		const len: number = row.length;
 		let i: number = 0;
@@ -122,7 +124,7 @@ function add(row: iRow | iRow[]) {
 	return this;
 }
 
-const initCRUD = (tableData = []) => {
+function initCRUD(tableData: any[]): void {
 	Object.defineProperties(tableData, {
 		select: { value: select },
 		selectPage: { value: selectPage },
@@ -137,14 +139,14 @@ const initCRUD = (tableData = []) => {
 // 生成数据库的同时生成 对应的接口 配置 , 再通过app去注册
 class VirtualDao {
 	@enumerable(false)
-	init(tableName: string, tableData?: tTable, app?: any) {
+	init(tableName: string, tableData?: tTable, app?: any): any {
 		if (!tableData) tableData = [];
 		initCRUD(tableData)
 		this[tableName] = tableData ?? []
 		return this;
 	}
 	@enumerable(false)
-	insert(tableName: string, tableData: tTable) {
+	insert(tableName: string, tableData: tTable): any {
 		if (!this[tableName]) this.init(tableName);
 		if (Array.isArray(tableData)) {
 			const len: number = tableData.length;

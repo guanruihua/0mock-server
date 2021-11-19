@@ -1,27 +1,75 @@
 import { VirtualDao } from '../dao'
 
-export interface iApi {
-	[key: string]: string;
-	callback: (params: any) => any;
+export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any): {
+	[key: string]: any,
+	// [key: 'get' | 'post']: string,
+	// callback: (params: any) => any
+}[] {
+	return [
+		{
+			'get': `/${tableName}/query`,
+			callback: (params: any): any => {
+				console.log(tableName, 'query', params);
+
+				if (resultParam) return resultParam(vDao[tableName])
+				return vDao[tableName];
+			}
+		},
+
+		{
+			'get': `/${tableName}/queryPage`,
+			callback: (params: any): any => {
+				console.log(tableName, 'queryPage', params);
+
+				const { pageSize = 10, pageNo = 1, ...param } = params || {}
+				let result: any = vDao[tableName].selectPage(param, pageSize, pageNo)
+				if (resultParam) return resultParam({ data: result, total: result.length, pageNo, pageSize })
+				return result;
+			}
+		},
+
+		{
+			'get': `/${tableName}/queryByParam`,
+			callback: (params: any): any => {
+				console.log(tableName, 'queryByParam', params);
+
+				let result: any = vDao[tableName].select(params)
+				if (resultParam) return resultParam(result)
+				return result;
+			}
+		},
+		{
+			'post': `/${tableName}/save`,
+			callback: (params: any): any => {
+				console.log(tableName, 'save', params);
+
+				let result: any = vDao[tableName].select(params)
+
+				if (params.id) {
+					result = vDao[tableName].update(params)
+				} else {
+					result = vDao[tableName].add(params)
+				}
+
+				if (resultParam) return resultParam(result)
+				return result;
+			}
+		},
+		{
+			'post': `/${tableName}/del`,
+			callback: (params: any): any => {
+				console.log(tableName, 'del', params);
+				const { pageNo, pageSize, ...param } = params;
+				let result: any = vDao[tableName].del(param)
+				if (resultParam) return resultParam(result)
+				return result;
+			}
+		},
+	];
 }
 
-// const apiList = [
-// 	{
-// 		'post': '/postA',
-// 		callback: (params: any): any => {
-// 			return params
-// 		}
-// 	},
-// 	{
-// 		'get': '/getA',
-// 		callback: (params: any): void => {
-// 			return params
-// 		}
-// 	}
-// ]
-
-export function loadApiByConfig(apiList, app) {
-	apiList.forEach((item: iApi): void => {
+export function loadApiByConfig(apiList: any[], app: any): void {
+	apiList.forEach((item: any): void => {
 		try {
 			console.log(item)
 			if (item.get) {
@@ -30,7 +78,7 @@ export function loadApiByConfig(apiList, app) {
 				});
 			}
 			if (item.post) {
-				app.post(item.post, (req: Request, res: Response): void => {
+				app.post(item.post, (req: any, res: any): void => {
 					res.json(item.callback(req.body))
 				})
 			}
