@@ -7,19 +7,17 @@ type tBaseType = any;
 // boolean | boolean[] |
 // undefined | iBaseObject;
 
-// interface iBaseObject {
-// 	[key: string]: tBaseType;
-// }
+interface iBaseObject {
+	[key: string]: tBaseType;
+}
 
 // interface iRow {
 // 	[key: string]: tBaseType;
 // }
 type iRow = any;
-type iParam = any;
-type iBaseObject = any;
-// interface iParam {
-// 	[key: string]: tBaseType;
-// }
+interface iParam {
+	[key: string]: tBaseType;
+}
 type tTable = iBaseObject[];
 
 function format(param?: iParam) {
@@ -139,7 +137,7 @@ function initCRUD(tableData: any[]): void {
 // 生成数据库的同时生成 对应的接口 配置 , 再通过app去注册
 class VirtualDao {
 	@enumerable(false)
-	init(tableName: string, tableData?: tTable, app?: any): any {
+	init(tableName: string, tableData?: tTable): any {
 		if (!tableData) tableData = [];
 		initCRUD(tableData)
 		this[tableName] = tableData ?? []

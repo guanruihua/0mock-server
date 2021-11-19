@@ -15,7 +15,9 @@ const controller = (app: Application): void => {
 	app.get(/\/random,(.+?)$/, random)
 
 	app.post(/\/post\/(?:vrp|virtualPost)/, virtualPost.singleReturnParams)
+	app.post('/post', virtualPost.singleReturnParams)
 	app.get(/\/get\/(?:vrg|virtualGet)$/, virtualGet.singleReturnParams)
+	app.get('/get', virtualGet.singleReturnParams)
 }
 
 export default controller;

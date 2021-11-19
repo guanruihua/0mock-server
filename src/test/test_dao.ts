@@ -1,5 +1,5 @@
 import { VirtualDao } from '../dao'
-const vDao = new VirtualDao();
+const vDao: any = new VirtualDao();
 vDao
 	.init('db1', [{
 		a: 123,

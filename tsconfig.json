@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "module": "commonjs",
+    // "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dist",
     "removeComments": true,
@@ -13,15 +13,14 @@
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": true, 
     "esModuleInterop": true,
-    "declaration": true,
+    // "declaration": true,
     // "declarationDir": "./src/**/*"
   },
   "include": [
     "./src/**/*",
-    "./src/type.d.ts"
   ],
   "exclude": [
     "./src/test",
-    "*.spec.ts"
+    // "*.spec.ts"
   ]
 }

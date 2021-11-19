@@ -1,5 +1,7 @@
 import { VirtualDao } from '../dao'
 
+
+// 生成 基础接口 配置
 export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any): {
 	'get'?: string,
 	'post'?: string,
@@ -22,7 +24,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 				console.log(tableName, 'queryPage', params);
 
 				const { pageSize = 10, pageNo = 1, ...param } = params || {}
-				let result: any = vDao[tableName].selectPage(param, pageSize, pageNo)
+				let result: any = vDao[tableName].selectPage(pageSize, pageNo, param)
 				if (resultParam) return resultParam({ data: result, total: result.length, pageNo, pageSize })
 				return result;
 			}
