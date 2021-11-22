@@ -1,8 +1,8 @@
 import { VirtualDao } from '../dao'
-
+import Mock from 'rh-mock'
 
 // 生成 基础接口 配置
-export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any): {
+export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any, config?: any): {
 	'get'?: string,
 	'post'?: string,
 	callback: (params: any) => any
@@ -12,7 +12,6 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			'get': `/${tableName}/query`,
 			callback: (params: any): any => {
 				console.log(tableName, 'query', params, '');
-
 				if (resultParam) return resultParam(vDao[tableName])
 				return vDao[tableName];
 			}
@@ -25,7 +24,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 
 				const { pageSize = 10, pageNo = 1, ...param } = params || {}
 				let result: any = vDao[tableName].selectPage(pageSize, pageNo, param)
-				if (resultParam) return resultParam({ data: result, total: result.length, pageNo, pageSize })
+				if (resultParam) return resultParam({ data: result, total: vDao[tableName].length, pageNo, pageSize })
 				return result;
 			}
 		},
@@ -44,20 +43,53 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			'post': `/${tableName}/save`,
 			callback: (params: any): any => {
 				console.log(tableName, 'save', params);
-
-				let result: any = vDao[tableName].select(params)
-
+				const { lang, fields = [],
+					langs = ['zh_CN', 'en_US', 'zh_TW']
+				} = config.locale || {}
 				if (params.id) {
-					result = vDao[tableName].update(params)
-				} else {
-					result = vDao[tableName].add(params)
-				}
+					let result: any = vDao[tableName].select({ id: param.id })[0]
+					if (lang) {
+						fields.forEach((key: string): void => {
+							let val: any = JSON.parse(result[key] || "{}")
+							params[lang] && (val[params[lang]] = params[key])
+							params[key] = JSON.stringify(val)
+						})
 
-				if (resultParam) return resultParam(result)
-				return result;
-			}
-		},
-		{
+						delete params[lang]
+						vDao['db'].update({ id: param.id }, param)
+					} else {
+						let tmpVal: any = undefined;
+						fields.forEach((key: string, index: number): void => {
+							if (index === 0) {
+								tmpVal = params[key];
+								params[key] = {};
+							}
+							langs.forEach((item: string): void => {
+								params[key][item] = tmpVal;
+							})
+							params[key] = JSON.stringify(params[key])
+						})
+						params.id = Mock.mock("@id")
+						delete params[lang]
+						vDao[tableName].add(params)
+					}
+
+					return {}
+
+					// let result: any = vDao[tableName].select(params)
+
+					// if (params.id) {
+					// 	result = vDao[tableName].update(params)
+					// } else {
+					// 	result = vDao[tableName].add(params)
+					// }
+
+					// if (resultParam) return resultParam(result)
+					// return result;
+				}
+			},
+
+{
 			'post': `/${tableName}/del`,
 			callback: (params: any): any => {
 				console.log(tableName, 'del', params);

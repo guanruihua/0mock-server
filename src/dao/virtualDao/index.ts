@@ -135,7 +135,7 @@ function initCRUD(tableData: any[]): void {
 
 // 简易数据临时存储实现实现
 // 生成数据库的同时生成 对应的接口 配置 , 再通过app去注册
-class VirtualDao {
+class VirtualDao {	
 	@enumerable(false)
 	init(tableName: string, tableData?: tTable): any {
 		if (!tableData) tableData = [];
