@@ -4,16 +4,6 @@
 
 > 支持某些指定字段多语言修改
 
-## 依赖
-
-```json
- "express": "^4.17.1",
- "lorem-ipsum": "^2.0.4",
- "nodemon": "^2.0.13",
- "canvas":"^2.8.0",
- "cors":"2.8.5",
-```
-
 ### `apiServer([host[, port[, callback]]])`
 
 > 不传就会是默认值
@@ -33,3 +23,13 @@
 ### 例如
 
 > <http://localhost:3000/3p>,
+
+## 依赖
+
+```json
+ "express": "^4.17.1",
+ "lorem-ipsum": "^2.0.4",
+ "nodemon": "^2.0.13",
+ "canvas":"^2.8.0",
+ "cors":"2.8.5",
+```

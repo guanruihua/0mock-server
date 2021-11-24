@@ -23,13 +23,14 @@ function apiServerCallback(app: Application): void {
 				// uid: "@uuid",
 				type: '@name',
 				'maxLength|1-30': 10,
-				desc: () => {
-					return JSON.stringify(Mock.mock({
-						zh_CN: '@name',
-						en_US: '@name',
-						zh_TW: '@name',
-					}))
-				},
+				// 'desc': () => {
+				// 	return JSON.stringify(Mock.mock({
+				// 		zh_CN: '@name',
+				// 		en_US: '@name',
+				// 		zh_TW: '@name',
+				// 	}))
+				// },
+				"desc&&zh_CN,en_US,zh_TW": "@name",
 				"shortURL|1": ["1", "2"],
 			}
 		})['list'],
@@ -39,27 +40,10 @@ function apiServerCallback(app: Application): void {
 		'db',
 		vDao,
 		(data: any) => {
-			return { code: '0', result: data }
-		}
-	), app, config)
-
-	app.post('/db/saveByLang', (req: any, res: any) => {
-		let param: any = req.body
-		if (param.id) {
-			let result: any = vDao.db.select({ id: param.id })[0]
-			let _desc: any = JSON.parse(result.desc || "{}")
-			param.localeStr && (_desc[param.localeStr] = param['desc'])
-			param['desc'] = JSON.stringify(_desc);
-			delete param.localeStr
-			vDao['db'].update({ id: param.id }, param)
-		} else {
-			delete param.localeStr
-			param.desc = JSON.stringify({ en_US: param.desc, zh_CN: param.desc, zh_TW: param.desc })
-			param.id = Mock.mock("@id")
-			vDao.db.add(param)
-		}
-		res.json({ code: '0', data: {} })
-	})
+			return { code: '0', result: data, message: 'Successful' }
+		},
+		config
+	), app)
 
 }
 

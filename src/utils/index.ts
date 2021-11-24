@@ -47,49 +47,42 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 					langs = ['zh_CN', 'en_US', 'zh_TW']
 				} = config.locale || {}
 				if (params.id) {
-					let result: any = vDao[tableName].select({ id: param.id })[0]
+					let result: any = vDao[tableName].select({ id: params.id })[0]
+
 					if (lang) {
 						fields.forEach((key: string): void => {
 							let val: any = JSON.parse(result[key] || "{}")
 							params[lang] && (val[params[lang]] = params[key])
 							params[key] = JSON.stringify(val)
 						})
-
 						delete params[lang]
-						vDao['db'].update({ id: param.id }, param)
-					} else {
-						let tmpVal: any = undefined;
-						fields.forEach((key: string, index: number): void => {
-							if (index === 0) {
-								tmpVal = params[key];
-								params[key] = {};
-							}
-							langs.forEach((item: string): void => {
-								params[key][item] = tmpVal;
-							})
-							params[key] = JSON.stringify(params[key])
-						})
-						params.id = Mock.mock("@id")
-						delete params[lang]
-						vDao[tableName].add(params)
 					}
+					vDao['db'].update({ id: params.id }, params)
 
-					return {}
+					if (resultParam) return resultParam(result)
+					return result;
 
-					// let result: any = vDao[tableName].select(params)
-
-					// if (params.id) {
-					// 	result = vDao[tableName].update(params)
-					// } else {
-					// 	result = vDao[tableName].add(params)
-					// }
-
-					// if (resultParam) return resultParam(result)
-					// return result;
+				} else {
+					let tmpVal: any = undefined;
+					fields.forEach((key: string, index: number): void => {
+						if (index === 0) {
+							tmpVal = params[key];
+							params[key] = {};
+						}
+						langs.forEach((item: string): void => {
+							params[key][item] = tmpVal;
+						})
+						params[key] = JSON.stringify(params[key])
+					})
+					params.id = Mock.mock("@id")
+					delete params[lang]
+					vDao[tableName].add(params)
+					if (resultParam) return resultParam({})
+					return {};
 				}
 			},
-
-{
+		},
+		{
 			'post': `/${tableName}/del`,
 			callback: (params: any): any => {
 				console.log(tableName, 'del', params);
