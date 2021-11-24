@@ -1,6 +1,6 @@
 {
   "name": "rh-dev-mock-server",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "",
   "main": "./dist/server.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "node",
     "javaScript"
   ],
-  "author": "",
+  "author": "ruihuag",
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.12",
