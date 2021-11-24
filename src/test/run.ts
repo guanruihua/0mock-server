@@ -1,8 +1,6 @@
-import { apiServer } from '../server'
-import { VirtualDao } from '../dao'
-import { Application } from 'express'
-import { loadApiByConfig, initTableApiConfig } from '../utils'
-import Mock from 'rh-mock'
+import DevServer from '../server'
+
+const { apiServer, Application, VirtualDao, loadApiByConfig, initTableApiConfig, Mock } = DevServer;
 
 function apiServerCallback(app: Application): void {
 
