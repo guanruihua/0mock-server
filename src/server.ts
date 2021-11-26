@@ -14,17 +14,14 @@ function apiServer(param?: { [key: string]: any }): void {
 }
 
 
-const DevServer = Object.assign(
-  {
-    apiServer,
-  },
-  {
-    Mock,
-    VirtualDao,
-    loadApiByConfig,
-    initTableApiConfig,
-    Application,
-  }
-)
+const DevServer = {
+  apiServer,
+  Mock,
+  VirtualDao,
+  loadApiByConfig,
+  initTableApiConfig,
+  Application,
+}
+
 
 export default DevServer
