@@ -1,7 +1,7 @@
 {
   "name": "rh-dev-mock-server",
   "version": "0.0.13",
-  "description": "",
+  "description": "快速生成一些CRUD的接口, 方便开发使用",
   "main": "./dist/server.js",
   "scripts": {
     "build": "rimraf ./dist & tsc",

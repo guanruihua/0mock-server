@@ -5,6 +5,9 @@ const { apiServer, Application, VirtualDao, loadApiByConfig, initTableApiConfig,
 function apiServerCallback(app: Application): void {
 
 	const config: any = {
+		queryPage: {
+			total: 'totalCount'
+		},
 		locale: {
 			lang: 'localeStr',
 			langs: ['zh_CN', 'en_US', 'zh_TW'],
@@ -46,5 +49,6 @@ function apiServerCallback(app: Application): void {
 }
 
 apiServer({
-	callback: apiServerCallback
+	callback: apiServerCallback,
+	port: 3001
 });
