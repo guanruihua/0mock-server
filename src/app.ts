@@ -34,7 +34,7 @@ class App {
     });
     //日志中间件
     this.app.use(morgan(function (tokens: any, req: Request, res: Response): any {
-      let url: string = tokens.url(req, res);
+      const url: string = tokens.url(req, res);
       if (url.indexOf('/sockjs-node/info?t=') > -1) {
         return;
       }

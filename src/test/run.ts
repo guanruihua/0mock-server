@@ -1,6 +1,6 @@
-import DevServer from '../server'
+import DevServer, { Application } from '../server'
 
-const { apiServer, Application, VirtualDao, loadApiByConfig, initTableApiConfig, Mock } = DevServer;
+const { apiServer,  VirtualDao, loadApiByConfig, initTableApiConfig, Mock } = DevServer;
 
 function apiServerCallback(app: Application): void {
 

@@ -20,8 +20,9 @@ const DevServer = {
   VirtualDao,
   loadApiByConfig,
   initTableApiConfig,
-  Application,
+  // Application,
 }
 
+export type Application = Application
 
 export default DevServer

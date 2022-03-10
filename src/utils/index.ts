@@ -12,7 +12,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			'get': `/${tableName}/query`,
 			callback: (params: any): any => {
 				console.log(tableName, 'query', params, '');
-				if (resultParam) return resultParam(vDao[tableName])
+				if (resultParam) {return resultParam(vDao[tableName])}
 				return vDao[tableName];
 			}
 		},
@@ -23,8 +23,8 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 				console.log(tableName, 'queryPage', params);
 
 				const { pageSize = 10, pageNo = 1, ...param } = params || {}
-				let result: any = vDao[tableName].selectPage(pageSize, pageNo, param)
-				if (resultParam) return resultParam({ data: result, total: vDao[tableName].length, pageNo, pageSize })
+				const result: any = vDao[tableName].selectPage(pageSize, pageNo, param)
+				if (resultParam) {return resultParam({ data: result, total: vDao[tableName].length, pageNo, pageSize })}
 				return result;
 			}
 		},
@@ -34,8 +34,8 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			callback: (params: any): any => {
 				console.log(tableName, 'queryByParam', params);
 
-				let result: any = vDao[tableName].select(params)
-				if (resultParam) return resultParam(result)
+				const result: any = vDao[tableName].select(params)
+				if (resultParam) {return resultParam(result)}
 				return result;
 			}
 		},
@@ -47,11 +47,11 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 					langs = ['zh_CN', 'en_US', 'zh_TW']
 				} = config.locale || {}
 				if (params.id) {
-					let result: any = vDao[tableName].select({ id: params.id })[0]
+					const result: any = vDao[tableName].select({ id: params.id })[0]
 
 					if (lang) {
 						fields.forEach((key: string): void => {
-							let val: any = JSON.parse(result[key] || "{}")
+							const val: any = JSON.parse(result[key] || "{}")
 							params[lang] && (val[params[lang]] = params[key])
 							params[key] = JSON.stringify(val)
 						})
@@ -59,7 +59,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 					}
 					vDao['db'].update({ id: params.id }, params)
 
-					if (resultParam) return resultParam(result)
+					if (resultParam) {return resultParam(result)}
 					return result;
 
 				} else {
@@ -77,7 +77,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 					params.id = Mock.mock("@id")
 					delete params[lang]
 					vDao[tableName].add(params)
-					if (resultParam) return resultParam({})
+					if (resultParam) {return resultParam({})}
 					return {};
 				}
 			},
@@ -86,9 +86,10 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			'post': `/${tableName}/del`,
 			callback: (params: any): any => {
 				console.log(tableName, 'del', params);
+				// eslint-disable-next-line
 				const { pageNo, pageSize, ...param } = params;
-				let result: any = vDao[tableName].del(param)
-				if (resultParam) return resultParam(result)
+				const result: any = vDao[tableName].del(param)
+				if (resultParam) {return resultParam(result)}
 				return result;
 			}
 		},

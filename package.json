@@ -11,6 +11,7 @@
     "test-c": "jest --coverage",
     "restart": "rimraf dist && npm run build && npm start",
     "start": "node ./dist/server.js",
+    "eslint": "eslint . --ext .ts --fix",
     "prod": "npm run build && npm run start",
     "pub": "push.bat & rimraf ./dist & tsc & npm publish"
   },
@@ -43,6 +44,10 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.3.1",
     "node-notifier": "^8.0.2",
     "ts-jest": "^27.0.7"

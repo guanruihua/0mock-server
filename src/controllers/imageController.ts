@@ -3,6 +3,7 @@ import { IMAGE_MAX_HEIGTH, IMAGE_MAX_WIDTH } from '../config'
 
 export function image(req: any, res: any): void {
 
+	// eslint-disable-next-line
 	let [width, height, format, bgColor, textColor] = Object.values(req.params)
 
 	width = Math.min(parseInt(width), IMAGE_MAX_WIDTH)
@@ -19,12 +20,12 @@ export function image(req: any, res: any): void {
 	ctx.fillStyle = bgColor
 	ctx.fillRect(0, 0, width, height)
 
-	let fontSize = width / 10
+	const fontSize = width / 10
 	ctx.fillStyle = textColor
 	ctx.font = `${fontSize}px Sans`
 
-	let text = `${width} x ${height}`
-	let textWidht = ctx.measureText(text).width;
+	const text = `${width} x ${height}`
+	const textWidht = ctx.measureText(text).width;
 
 	ctx.fillText(text, width / 2 - textWidht / 2, height / 2)
 
