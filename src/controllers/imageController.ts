@@ -8,8 +8,10 @@ export function image(req: any, res: any): void {
 
 	width = Math.min(parseInt(width), IMAGE_MAX_WIDTH)
 	height = Math.min(parseInt(height), IMAGE_MAX_HEIGTH)
+	
 	typeof bgColor === 'undefined' && (bgColor = '#333333')
 	isHexColor(bgColor) && (bgColor = `#${bgColor}`)
+
 	typeof textColor === 'undefined' && (textColor = '#ffffff')
 	isHexColor(textColor) && (textColor = `#${textColor}`)
 
