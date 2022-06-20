@@ -4,8 +4,14 @@ import { word } from './wordController'
 import { random } from './randomController'
 import { sentence } from './sentenceController'
 import { paragraph } from './paragraphController'
-import * as virtualGet from './virtualGet'
-import * as virtualPost from './virtualPost'
+
+export function singleReturnGetParams(req: any, res: any): void {
+	res.send(req.query)
+}
+
+export function singleReturnPostParams(req: any, res: any): void {
+	res.json({ ...req.query, ...req.body })
+}
 
 export default function controller(app: Application): void {
 	app.get(/\/(\d+)(?:p|paragraph|paragraphs)(,*)$/, paragraph)
@@ -14,8 +20,8 @@ export default function controller(app: Application): void {
 	app.get(/\/(\d+)x(\d+)\.(jpg|png)(?:,([a-zA-Z0-9]+?),([a-zA-Z0-9]+?))*$/, image)
 	app.get(/\/random,(.+?)$/, random)
 
-	app.post(/\/post\/(?:vrp|virtualPost)/, virtualPost.singleReturnParams)
-	app.post('/post', virtualPost.singleReturnParams)
-	app.get(/\/get\/(?:vrg|virtualGet)$/, virtualGet.singleReturnParams)
-	app.get('/get', virtualGet.singleReturnParams)
+	app.post(/\/post\/(?:vrp|virtualPost)/, singleReturnPostParams)
+	app.post('/post', singleReturnPostParams)
+	app.get(/\/get\/(?:vrg|virtualGet)$/, singleReturnGetParams)
+	app.get('/get', singleReturnGetParams)
 }
