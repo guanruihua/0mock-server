@@ -2,18 +2,11 @@ import { _Decorator } from 'rh-ts-methods'
 
 const { enumerable } = _Decorator
 type tBaseType = any;
-// number | number[] |
-// string | string[] |
-// boolean | boolean[] |
-// undefined | iBaseObject;
 
 interface iBaseObject {
 	[key: string]: tBaseType;
 }
 
-// interface iRow {
-// 	[key: string]: tBaseType;
-// }
 type iRow = any;
 interface iParam {
 	[key: string]: tBaseType;

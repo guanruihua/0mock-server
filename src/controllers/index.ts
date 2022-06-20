@@ -7,7 +7,7 @@ import { paragraph } from './paragraphController'
 import * as virtualGet from './virtualGet'
 import * as virtualPost from './virtualPost'
 
-const controller = (app: Application): void => {
+export default function controller(app: Application): void {
 	app.get(/\/(\d+)(?:p|paragraph|paragraphs)(,*)$/, paragraph)
 	app.get(/\/(\d+)(?:w|word|words)(,*)$/, word)
 	app.get(/\/(\d+)(?:s|sentence|sentences)(,*)$/, sentence)
@@ -19,5 +19,3 @@ const controller = (app: Application): void => {
 	app.get(/\/get\/(?:vrg|virtualGet)$/, virtualGet.singleReturnParams)
 	app.get('/get', virtualGet.singleReturnParams)
 }
-
-export default controller;

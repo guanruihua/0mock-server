@@ -1,6 +1,5 @@
-import DevServer, { Application } from '../server'
-
-const { apiServer,  VirtualDao, loadApiByConfig, initTableApiConfig, Mock } = DevServer;
+import { Mock } from 'rh-mock';
+import { apiServer, VirtualDao, loadApiByConfig, initTableApiConfig, Application } from '../server'
 
 function apiServerCallback(app: Application): void {
 
@@ -18,19 +17,12 @@ function apiServerCallback(app: Application): void {
 	const vDao: any = new VirtualDao();
 	vDao.init(
 		'db',
-		Mock.mock({
+		Mock({
 			'list|30-50': {
 				id: "@id",
-				// uid: "@uuid",
+				uid: "@uuid",
 				type: '@name',
 				'maxLength|1-30': 10,
-				// 'desc': () => {
-				// 	return JSON.stringify(Mock.mock({
-				// 		zh_CN: '@name',
-				// 		en_US: '@name',
-				// 		zh_TW: '@name',
-				// 	}))
-				// },
 				"desc&&zh_CN,en_US,zh_TW": "@name",
 				"shortURL|1": ["1", "2"],
 			}

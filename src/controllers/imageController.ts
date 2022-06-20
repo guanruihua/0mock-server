@@ -4,11 +4,11 @@ import { IMAGE_MAX_HEIGTH, IMAGE_MAX_WIDTH } from '../config'
 export function image(req: any, res: any): void {
 
 	// eslint-disable-next-line
-	let [width, height, format, bgColor, textColor] = Object.values(req.params)
+	let [_width, _height, format, bgColor, textColor]: string[] = Object.values(req.params)
 
-	width = Math.min(parseInt(width), IMAGE_MAX_WIDTH)
-	height = Math.min(parseInt(height), IMAGE_MAX_HEIGTH)
-	
+	const width = Math.min(parseInt(_width), IMAGE_MAX_WIDTH)
+	const height = Math.min(parseInt(_height), IMAGE_MAX_HEIGTH)
+
 	typeof bgColor === 'undefined' && (bgColor = '#333333')
 	isHexColor(bgColor) && (bgColor = `#${bgColor}`)
 
@@ -17,7 +17,7 @@ export function image(req: any, res: any): void {
 
 
 	const canvas: any = createCanvas(width, height)
-	const ctx: any = canvas.getContext('2d')
+	const ctx = canvas.getContext('2d')
 
 	ctx.fillStyle = bgColor
 	ctx.fillRect(0, 0, width, height)

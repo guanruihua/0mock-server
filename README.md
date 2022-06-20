@@ -29,9 +29,8 @@
 ### 代码案例
 
 ```js
-import DevServer from 'rh-dev-mock-server'
-
-const { apiServer, VirtualDao, loadApiByConfig, initTableApiConfig, Mock } = DevServer.default;
+import {Mock} from 'rh-mock'
+import { apiServer, VirtualDao, loadApiByConfig, initTableApiConfig } from 'rh-dev-mock-server'
 
 function apiServerCallback(app) {
 
@@ -46,19 +45,12 @@ function apiServerCallback(app) {
  const vDao = new VirtualDao();
  vDao.init(
   'db',
-  Mock.mock({
+  Mock({
    'list|30-50': {
     'id': "@id",
     // uid: "@uuid",
     'type': '@name',
-    'maxLength|1-30': 10,
-    // 'desc': () => {
-    //  return JSON.stringify(Mock.mock({
-    //   zh_CN: '@name',
-    //   en_US: '@name',
-    //   zh_TW: '@name',
-    //  }))
-    // },
+    // 'maxLength|1-30': 10,
     "desc&&zh_CN,en_US,zh_TW": "@name",
     "shortURL|1": ["1", "2"],
    }

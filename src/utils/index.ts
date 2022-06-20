@@ -1,5 +1,5 @@
 import { VirtualDao } from '../dao'
-import Mock from 'rh-mock'
+import { Mock } from 'rh-mock'
 
 // 生成 基础接口 配置
 export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any, config?: any): {
@@ -12,7 +12,9 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			'get': `/${tableName}/query`,
 			callback: (params: any): any => {
 				console.log(tableName, 'query', params, '');
-				if (resultParam) {return resultParam(vDao[tableName])}
+				if (resultParam) {
+					return resultParam(vDao[tableName])
+				}
 				return vDao[tableName];
 			}
 		},
@@ -24,7 +26,14 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 
 				const { pageSize = 10, pageNo = 1, ...param } = params || {}
 				const result: any = vDao[tableName].selectPage(pageSize, pageNo, param)
-				if (resultParam) {return resultParam({ data: result, total: vDao[tableName].length, pageNo, pageSize })}
+				if (resultParam) {
+					return resultParam({
+						data: result,
+						total: vDao[tableName].length,
+						pageNo,
+						pageSize
+					})
+				}
 				return result;
 			}
 		},
@@ -35,7 +44,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 				console.log(tableName, 'queryByParam', params);
 
 				const result: any = vDao[tableName].select(params)
-				if (resultParam) {return resultParam(result)}
+				if (resultParam) { return resultParam(result) }
 				return result;
 			}
 		},
@@ -59,7 +68,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 					}
 					vDao['db'].update({ id: params.id }, params)
 
-					if (resultParam) {return resultParam(result)}
+					if (resultParam) { return resultParam(result) }
 					return result;
 
 				} else {
@@ -74,10 +83,10 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 						})
 						params[key] = JSON.stringify(params[key])
 					})
-					params.id = Mock.mock("@id")
+					params.id = Mock("@id")
 					delete params[lang]
 					vDao[tableName].add(params)
-					if (resultParam) {return resultParam({})}
+					if (resultParam) { return resultParam({}) }
 					return {};
 				}
 			},
@@ -89,7 +98,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 				// eslint-disable-next-line
 				const { pageNo, pageSize, ...param } = params;
 				const result: any = vDao[tableName].del(param)
-				if (resultParam) {return resultParam(result)}
+				if (resultParam) { return resultParam(result) }
 				return result;
 			}
 		},
