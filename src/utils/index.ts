@@ -2,14 +2,22 @@ import { VirtualDao } from '../dao'
 import { Mock } from 'rh-mock'
 
 // 生成 基础接口 配置
-export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultParam?: any, config?: any): {
-	'get'?: string,
-	'post'?: string,
-	callback: (params: any) => any
+export function initTableApiConfig(
+	tableName: string,
+	vDao: VirtualDao,
+	resultParam?: any,
+	config?: any
+): {
+	baseUrl?: string,
+	get?: string,
+	post?: string,
+	callback: (...params: any[]) => any
 }[] {
+	const { baseUrl = '/' } = config
+
 	return [
 		{
-			'get': `/${tableName}/query`,
+			'get': `${baseUrl}${tableName}/query`,
 			callback: (params: any): any => {
 				console.log(tableName, 'query', params, '');
 				if (resultParam) {
@@ -20,7 +28,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 		},
 
 		{
-			'get': `/${tableName}/queryPage`,
+			'get': `${baseUrl}${tableName}/queryPage`,
 			callback: (params: any): any => {
 				console.log(tableName, 'queryPage', params);
 
@@ -39,7 +47,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 		},
 
 		{
-			'get': `/${tableName}/queryByParam`,
+			'get': `${baseUrl}${tableName}/queryByParam`,
 			callback: (params: any): any => {
 				console.log(tableName, 'queryByParam', params);
 
@@ -49,7 +57,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			}
 		},
 		{
-			'post': `/${tableName}/save`,
+			'post': `${baseUrl}${tableName}/save`,
 			callback: (params: any): any => {
 				console.log(tableName, 'save', params);
 				const { lang, fields = [],
@@ -92,7 +100,7 @@ export function initTableApiConfig(tableName: string, vDao: VirtualDao, resultPa
 			},
 		},
 		{
-			'post': `/${tableName}/del`,
+			'post': `${baseUrl}${tableName}/del`,
 			callback: (params: any): any => {
 				console.log(tableName, 'del', params);
 				// eslint-disable-next-line
@@ -111,12 +119,13 @@ export function loadApiByConfig(apiList: any[], app: any): void {
 			console.log(item)
 			if (item.get) {
 				app.get(item.get, (req: any, res: any): void => {
-					res.send(item.callback(req.query))
+					res.send(item.callback(req.query, req, res))
 				});
 			}
 			if (item.post) {
 				app.post(item.post, (req: any, res: any): void => {
-					res.json(item.callback(req.body))
+					res.json(item.callback(req.query, req, res))
+					// res.json(item.callback(req.body, req, res))
 				})
 			}
 		} catch (error) {

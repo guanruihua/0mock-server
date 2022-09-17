@@ -1,4 +1,6 @@
 import { _Decorator } from 'rh-ts-methods'
+import {} from 'rh-js-methods'
+
 
 const { enumerable } = _Decorator
 type tBaseType = any;

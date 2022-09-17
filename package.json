@@ -36,6 +36,7 @@
     "rh-js-methods": "^0.0.12",
     "rh-mock": "^1.2.0",
     "rh-ts-methods": "^0.0.2",
+    "rh-vr-dao": "0.0.2",
     "rimraf": "^3.0.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"

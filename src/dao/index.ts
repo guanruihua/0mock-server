@@ -1,6 +1,1 @@
-import VirtualDao from './virtualDao'
-
-
-export {
-	VirtualDao,
-}
+export { default as VirtualDao } from './virtualDao'
