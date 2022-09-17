@@ -1,4 +1,4 @@
-import { apiServer, loadApiByConfig, Application } from '../server'
+import { apiServer, loadApiByConfig, Application } from '..'
 import { api } from './api'
 
 function apiServerCallback(app: Application): void {

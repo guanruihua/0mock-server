@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ESNext",
     "module": "commonjs",
     "sourceMap": true,
-    "outDir": "./dist",
-    "removeComments": true,
+    "outDir": "./lib",
+    "removeComments": false,
     "noImplicitAny": false,
     "strictNullChecks": true,
     "alwaysStrict": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "allowSyntheticDefaultImports": true, 
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     // "declaration": true,
     // "declarationDir": "./src/**/*"
@@ -21,6 +21,11 @@
   ],
   "exclude": [
     "./src/test",
+    "*.config.ts",
+    "**/*/__test__/*",
+    "**/*/__test__/",
+    "**/*/md.ts",
+    "**/*/*.md"
     // "*.spec.ts"
   ]
 }

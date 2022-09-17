@@ -1,6 +1,6 @@
 lib/
 test/
-src/
+# src/
 push.bat
 README.md
 .gitignore

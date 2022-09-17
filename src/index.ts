@@ -1,8 +1,7 @@
 import app from './app'
 import { HOST, PORT } from './config'
-import { Application } from 'express'
-import { VirtualDao } from './dao'
-import { VDao } from 'rh-vr-dao'
+export { Application } from 'express'
+export * from 'rh-vr-dao'
 import { loadApiByConfig, initTableApiConfig } from './utils'
 
 export function apiServer(param?: { [key: string]: any }): void {
@@ -13,11 +12,7 @@ export function apiServer(param?: { [key: string]: any }): void {
   })
 }
 
-export type Application = Application
-
 export {
-  VirtualDao,
   loadApiByConfig,
   initTableApiConfig,
-  VDao
 }

@@ -30,7 +30,7 @@
 
 ```js
 import {Mock} from 'rh-mock'
-import { apiServer, VirtualDao, loadApiByConfig, initTableApiConfig } from 'rh-dev-mock-server'
+import { apiServer, loadApiByConfig, initTableApiConfig } from 'rh-dev-mock-server'
 
 function apiServerCallback(app) {
 

@@ -1,10 +1,10 @@
-import { VirtualDao } from '../dao'
+import { VDao } from 'rh-vr-dao'
 import { Mock } from 'rh-mock'
 
 // 生成 基础接口 配置
 export function initTableApiConfig(
 	tableName: string,
-	vDao: VirtualDao,
+	vDao: VDao,
 	resultParam?: any,
 	config?: any
 ): {

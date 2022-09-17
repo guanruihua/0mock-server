@@ -1,5 +1,5 @@
 import { Mock } from 'rh-mock';
-import { VDao, initTableApiConfig } from '../../server'
+import { VDao, initTableApiConfig } from '../..'
 import { config } from '../constant'
 
 const vDao: any = new VDao();
