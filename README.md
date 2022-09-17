@@ -1,6 +1,8 @@
 # 使用说明
 
-> package.json 添加 '"type": "module"'
+```shell
+npm install -D canvas rh-dev-mock-server rh-mock ts-node-dev typescript
+```
 
 ## 添加功能
 
@@ -29,18 +31,19 @@
 ### 代码案例
 
 ```js
-import {Mock} from 'rh-mock'
-import { apiServer, loadApiByConfig, initTableApiConfig } from 'rh-dev-mock-server'
+import { Mock } from 'rh-mock'
+import { apiServer, loadApiByConfig, initTableApiConfig, Application } from 'rh-dev-mock-server'
+import { apiServer, loadApiByConfig, Application } from 'rh-dev-mock-server'
 
-function apiServerCallback(app) {
-
- const config = {
+const config = {
   locale: {
    lang: 'localeStr',
    langs: ['zh_CN', 'en_US', 'zh_TW'],
    fields: ['desc']
   }
  }
+
+function apiServerCallback(app) {
 
  const vDao = new VirtualDao();
  vDao.init(
@@ -65,10 +68,13 @@ function apiServerCallback(app) {
   },
   config
  ), app)
-
 }
 
 apiServer({
- callback: apiServerCallback
+ callback: apiServerCallback,
+  port: 10086
 });
+
+// 控制台就有接口显示出来
+
 ```
