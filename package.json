@@ -14,8 +14,9 @@
     "restart": "rimraf dist && npm run build && npm start",
     "eslint": "eslint . --ext .ts --fix",
     "prod": "npm run build && npm run start",
-    "pu": "npm publish",
-    "pub": "push.bat & rimraf ./dist & tsc & npm publish"
+    "patch":"npm version patch -f",
+    "pub": "npm publish",
+    "pub:reload": "push.bat & rimraf ./dist & tsc & npm publish"
   },
   "keywords": [
     "typescript",
