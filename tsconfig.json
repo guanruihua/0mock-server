@@ -1,27 +1,28 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "CommonJS",
     "sourceMap": true,
     "outDir": "./lib",
     "removeComments": false,
     "noImplicitAny": false,
-    "strictNullChecks": true,
-    "alwaysStrict": true,
+    "strictNullChecks": false,
+    "alwaysStrict": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    // "moduleResolution": "NodeNext",
     "baseUrl": "./src",
-    "allowSyntheticDefaultImports": true,
+    // "importHelpers": true,
+    // "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    // "declaration": true,
-    // "declarationDir": "./src/**/*"
+    "declaration": true
   },
   "include": [
+    "./typings/*.d.ts",
     "./src/**/*",
   ],
   "exclude": [
-    "./src/test",
-    "*.config.ts",
+    // "./src/test",
+    // "*.config.ts",
     "**/*/__test__/*",
     "**/*/__test__/",
     "**/*/md.ts",

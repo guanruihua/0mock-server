@@ -32,8 +32,7 @@ npm install -D canvas rh-dev-mock-server rh-mock ts-node-dev typescript
 
 ```js
 import { Mock } from 'rh-mock'
-import { apiServer, loadApiByConfig, initTableApiConfig, Application } from 'rh-dev-mock-server'
-import { apiServer, loadApiByConfig, Application } from 'rh-dev-mock-server'
+import { apiServer, loadApis, initTableApi } from 'rh-dev-mock-server'
 
 const config = {
   locale: {
@@ -60,7 +59,7 @@ function apiServerCallback(app) {
   })['list'],
  );
 
- loadApiByConfig(initTableApiConfig(
+ loadApis(initTableApi(
   'db',
   vDao,
   (data) => {
