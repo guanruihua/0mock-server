@@ -1,6 +1,6 @@
 {
   "name": "rh-dev-mock-server",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "快速生成一些CRUD的接口, 方便开发使用",
   "main": "lib/index.js",
   "module": "lib/index.js",
