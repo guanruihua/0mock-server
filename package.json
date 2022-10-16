@@ -14,7 +14,7 @@
     "restart": "rimraf dist && npm run build && npm start",
     "eslint": "eslint . --ext .ts --fix",
     "prod": "npm run build && npm run start",
-    "patch":"npm version patch -f",
+    "patch": "npm version patch -f",
     "pub": "npm publish",
     "pub:reload": "push.bat & rimraf ./dist & tsc & npm publish"
   },
@@ -27,23 +27,22 @@
   "author": "ruihuag",
   "license": "ISC",
   "dependencies": {
-    "rh-color": "^1.0.2",
     "body-parser": "^1.19.0",
     "canvas": "^2.8.0",
     "cors": "^2.8.5",
     "eslint": "^8.7.0",
     "express": "^4.17.1",
     "lorem-ipsum": "^2.0.4",
-    "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
     "prettier": "^2.7.1",
     "reflect-metadata": "^0.1.13",
+    "rh-color": "^1.0.2",
     "rh-js-methods": "^2.1.11",
-    "rh-mock": "^1.3.1",
+    "rh-mock": "^1.3.4",
     "rh-ts-methods": "^0.0.2",
     "rh-vr-dao": "0.0.9",
-    "typescript": "^4.4.4",
-    "ts-node-dev": "^1.1.8"
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",

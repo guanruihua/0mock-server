@@ -9,6 +9,7 @@
     "strictNullChecks": false,
     "alwaysStrict": false,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     // "moduleResolution": "NodeNext",
     "baseUrl": "./src",
     // "importHelpers": true,
@@ -17,6 +18,7 @@
     "declaration": true
   },
   "include": [
+    "./node_modules/**/*.d.ts",
     "./typings/*.d.ts",
     "./src/**/*",
   ],
