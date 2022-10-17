@@ -10,10 +10,10 @@
     "alwaysStrict": false,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    // "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
     "baseUrl": "./src",
-    // "importHelpers": true,
-    // "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declaration": true
   },
@@ -23,12 +23,9 @@
     "./src/**/*",
   ],
   "exclude": [
-    // "./src/test",
-    // "*.config.ts",
     "**/*/__test__/*",
     "**/*/__test__/",
     "**/*/md.ts",
     "**/*/*.md"
-    // "*.spec.ts"
   ]
 }

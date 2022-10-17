@@ -5,3 +5,4 @@ dist/
 ./pull.bat
 *.log
 *lock
+lib/
