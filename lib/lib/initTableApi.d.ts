@@ -1,4 +1,4 @@
-import { VDao } from 'rh-vr-dao';
+import { VDao } from '0vdao';
 interface TableApiConfig {
     baseUrl?: string;
     locale?: {

@@ -1,7 +1,7 @@
 # 使用说明
 
 ```shell
-npm install -D canvas rh-dev-mock-server rh-mock ts-node-dev typescript
+npm install -D canvas 0mock-server mock-record ts-node-dev typescript
 ```
 
 ## 添加功能
@@ -31,8 +31,8 @@ npm install -D canvas rh-dev-mock-server rh-mock ts-node-dev typescript
 ### 代码案例
 
 ```js
-import { Mock } from 'rh-mock'
-import { apiServer, loadApis, initTableApi } from 'rh-dev-mock-server'
+import { mock } from 'mock-record'
+import { apiServer, loadApis, initTableApi } from '0mock-server'
 
 const config = {
   locale: {
@@ -47,7 +47,7 @@ function apiServerCallback(app) {
  const vDao = new VirtualDao();
  vDao.init(
   'db',
-  Mock({
+  mock({
    'list|30-50': {
     'id': "@id",
     // uid: "@uuid",

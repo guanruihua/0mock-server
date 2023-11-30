@@ -1,7 +1,7 @@
 import { createCanvas } from 'canvas'
 import { Request, Response } from 'express'
 import { loadApis } from '../lib/loadApis'
-import { IMAGE_MAX_HEIGTH, IMAGE_MAX_WIDTH } from '../lib'
+import { IMAGE_MAX_HEIGTH, IMAGE_MAX_WIDTH } from '../lib/config'
 
 function isHexColor(hex: any): boolean {
 	return typeof hex === 'string'

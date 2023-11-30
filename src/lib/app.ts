@@ -3,8 +3,6 @@ import bodyParser, { json, urlencoded } from 'body-parser'
 import cors from 'cors'
 import morgan from 'morgan'
 
-// console.log(dao)
-
 export class App {
   public app: express.Application;
   constructor() {

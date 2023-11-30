@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { LoremIpsum } from 'lorem-ipsum'
 import { MAX_SENTENCE } from '../lib/config'
-import { loadApis } from '../lib'
+import { loadApis } from '../lib/loadApis'
 
 // eslint-disable-next-line
 export function sentence(param: Record<string, any>, req: Request, res: Response): Record<string, any> {

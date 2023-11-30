@@ -1,5 +1,5 @@
-import { VDao } from 'rh-vr-dao'
-import { Mock } from 'rh-mock'
+import { VDao } from '0vdao'
+import { mock } from 'mock-record'
 
 interface TableApiConfig {
 	baseUrl?: string
@@ -109,7 +109,7 @@ export function initTableApi(
 						})
 						params[key] = JSON.stringify(params[key])
 					})
-					params.id = Mock("@id")
+					params.id = mock("@id")
 					delete params[lang]
 					vDao[tableName].add(params)
 					if (analysisParam) { return analysisParam({}) }
@@ -151,7 +151,7 @@ export function initTableApi(
 						})
 						params[key] = JSON.stringify(params[key])
 					})
-					params.id = Mock("@id")
+					params.id = mock("@id")
 					delete params[lang]
 					vDao[tableName].add(params)
 					if (analysisParam) { return analysisParam({}) }
