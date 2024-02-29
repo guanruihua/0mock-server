@@ -1,7 +1,7 @@
 # 使用说明
 
 ```shell
-npm install -D canvas 0mock-server mock-record ts-node-dev typescript
+npm install -D canvas 0mock-server mock-record ts-node-dev typescript 0vdao
 ```
 
 ## 添加功能
@@ -32,6 +32,7 @@ npm install -D canvas 0mock-server mock-record ts-node-dev typescript
 
 ```js
 import { mock } from 'mock-record'
+import { VDao } from '0vdao'
 import { apiServer, loadApis, initTableApi } from '0mock-server'
 
 const config = {
@@ -44,7 +45,7 @@ const config = {
 
 function apiServerCallback(app) {
 
- const vDao = new VirtualDao();
+ const vDao = new VDao();
  vDao.init(
   'db',
   mock({
